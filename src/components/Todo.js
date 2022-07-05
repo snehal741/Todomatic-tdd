@@ -29,14 +29,15 @@ export default function Todo(props){
   }
   
   const editingTemplate = (
-    <form className="stack-small" onSubmit={handleSubmit}>
+    <form data-testid="todo-edit-form" className="stack-small" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label className="todo-label" htmlFor={props.id}>
+        <label className="todo-label" data-testid="todo-edit-label" htmlFor={props.id}>
           New name for {props.name}
         </label>
         <input
            id={props.id} 
-           className="todo-text" 
+           className="todo-text"
+           data-testid = "todo-edit-input" 
            type="text" 
            value={newName}
            onChange = {handleChange} 
@@ -44,11 +45,11 @@ export default function Todo(props){
         />
       </div>
       <div className="btn-group">
-        <button type="button" className="btn todo-cancel" onClick={()=> setEditing(false)}>
+        <button type="button" data-testid="todo-edit-cancel" className="btn todo-cancel" onClick={()=> setEditing(false)}>
           Cancel
           <span className="visually-hidden">renaming {props.name}</span>
         </button>
-        <button type="submit" className="btn btn__primary todo-edit">
+        <button type="submit" data-testid="todo-edit-save" className="btn btn__primary todo-edit">
           Save
           <span className="visually-hidden">new name for {props.name}</span>
         </button>
@@ -60,6 +61,7 @@ export default function Todo(props){
       <div className="c-cb">
           <input
             id={props.id}
+            data-testid = "todo-checkbox"
             type="checkbox"
             defaultChecked={props.completed}
             onChange={() => props.toggleTaskCompleted(props.id)}
@@ -71,6 +73,7 @@ export default function Todo(props){
         <div className="btn-group">
           <button 
             type="button" 
+            data-testid = "todo-edit"
             className="btn" 
             onClick={()=> setEditing(true)}
             ref = {editButtonRef}
@@ -79,10 +82,11 @@ export default function Todo(props){
           </button>
           <button
             type="button"
+            data-testid = "todo-delete"
             className="btn btn__danger"
             onClick={() => props.deleteTask(props.id)}
           >
-            Delete <span className="visually-hidden">{props.name}</span>
+            Delete <span data-testid = "todo-name" className="visually-hidden">{props.name}</span>
           </button>
         </div>
     </div>
@@ -100,3 +104,4 @@ export default function Todo(props){
   return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
 
 }
+;
